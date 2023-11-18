@@ -2,6 +2,7 @@ import React from "react";
 import User from "../assets/User.png";
 import online from "../assets/online.png";
 import offline from "../assets/offline.png";
+import Activeuser from "../assets/Activeuser.png";
 import Done from "../assets/Done.png";
 import Todo from "../assets/Todo.png";
 import NoPriority from "../assets/NoPriority.png";
@@ -19,13 +20,12 @@ const ContentCard = ({ uid, status, title, tag, userId, priority }) => {
     Done: { title: "Done", imageLink: Done },
   };
   const groupBy = useSelector((store) => store.cart.groupBy);
-  const priorityObject = {
-    0: { title: "No Priority", imageLink: NoPriority },
-    1: { title: "Low", imageLink: LowPriority },
-    2: { title: "Medium", imageLink: MediumPriority },
-    3: { title: "High", imageLink: HighPriority },
-    4: { title: "Urgent", imageLink: UrgentPriority },
-  };
+  const users=useSelector(state=>state.cart.userData)
+  function getUserStatusById(userId) {
+    const user = users.find(user => user.id === userId);
+    console.log(user)
+    return user.available 
+  }
   return (
     <div className="content-card shadow border flex-col g-10 bg-primary">
       {/* part 1 uid */}
@@ -41,7 +41,7 @@ const ContentCard = ({ uid, status, title, tag, userId, priority }) => {
             <div className="status">
               <img
                 className=""
-                src={status == "offline" ? online : offline}
+                src={getUserStatusById(userId)==true?Activeuser:offline}
                 alt=""
               />
             </div>
@@ -67,6 +67,7 @@ const ContentCard = ({ uid, status, title, tag, userId, priority }) => {
         </div>
         <div className="content-card-footer-tag border shadow g-5 flex">
           <div className=" ">
+            
             <img src={offline} alt="" />
           </div>
           <div className="text-secoundary">{tag}</div>

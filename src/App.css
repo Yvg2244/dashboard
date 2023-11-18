@@ -135,6 +135,7 @@
 .heading-logo {
   height: 20px;
   aspect-ratio: 1;
+  position:relative;
 }
 .heading-logo img {
   aspect-ratio: 1;

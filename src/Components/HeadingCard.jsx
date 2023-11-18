@@ -12,7 +12,7 @@ import Plus from "../assets/Plus.png";
 import Ellipsis from "../assets/Ellipsis.png";
 import User from "../assets/User.png";
 import offline from "../assets/offline.png";
-
+import Activeuser from "../assets/Activeuser.png";
 import ContentCard from "./ContentCard";
 const HeadingCard = ({ groupingKey, orderingKey, value }) => {
   const priorityObject = {
@@ -47,7 +47,12 @@ const HeadingCard = ({ groupingKey, orderingKey, value }) => {
       );
     }
   };
-  // console.log(findTicketByCriteria(groupingKey, value));
+
+  function getUserStatusById(userId) {
+    const user = users.find((user) => user.id === userId);
+    console.log(user);
+    return user.available;
+  }
   return (
     <>
       <div className="heading-card border flex ">
@@ -71,6 +76,15 @@ const HeadingCard = ({ groupingKey, orderingKey, value }) => {
             <div className="flex align-center g-10">
               <div className="heading-logo">
                 <img src={User} alt="" />
+                <div className="status">
+                  <img
+                    className=""
+                    src={
+                      getUserStatusById(value) == true ? Activeuser : offline
+                    }
+                    alt=""
+                  />
+                </div>
               </div>
               <div className="bold s-12">{findUserNameById(value)}</div>
             </div>
