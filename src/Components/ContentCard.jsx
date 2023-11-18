@@ -19,6 +19,13 @@ const ContentCard = ({ uid, status, title, tag, userId, priority }) => {
     Backlog: { title: "Backlog", imageLink: Inprogress },
     Done: { title: "Done", imageLink: Done },
   };
+  const priorityObject = {
+    0: { title: "No Priority", imageLink: NoPriority },
+    1: { title: "Low", imageLink: LowPriority },
+    2: { title: "Medium", imageLink: MediumPriority },
+    3: { title: "High", imageLink: HighPriority },
+    4: { title: "Urgent", imageLink: UrgentPriority },
+  };
   const groupBy = useSelector((store) => store.cart.groupBy);
   const users=useSelector(state=>state.cart.userData)
   function getUserStatusById(userId) {
@@ -59,10 +66,11 @@ const ContentCard = ({ uid, status, title, tag, userId, priority }) => {
         )}
         <div className="bold">{title}</div>
       </div>
+      {/* part 3 footer */}
       <div className="flex g-10">
         <div className="content-card-footer flex  border shadow">
           <div className="content-card-footer-img ">
-            <img src={HighPriority} alt="" />
+            <img src={priorityObject[priority].imageLink} alt="" />
           </div>
         </div>
         <div className="content-card-footer-tag border shadow g-5 flex">
